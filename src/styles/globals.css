@@ -1259,3 +1259,100 @@ body {
     opacity: 1;
   }
 }
+/* ——————————————— */
+/* MOBILE HAMBURGER FIX */
+/* ——————————————— */
+@media (max-width: 768px) {
+  /* sparisce il checkbox vero */
+  #menu-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* hamburger in alto a destra */
+  .hamburger {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1.75rem;
+    height: 1.5rem;
+    cursor: pointer;
+    z-index: 300;
+  }
+  .hamburger span {
+    display: block;
+    height: 0.2rem;
+    background: #1a1a1a;
+    border-radius: 4px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* nav-actions si fa full-screen sotto l’hamburger */
+  .nav-actions {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 250;
+  }
+
+  /* menu vero e proprio */
+  .main-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 75%;
+    max-width: 280px;
+    height: 100%;
+    background: #fdf7f2;
+    padding: 4rem 1.5rem;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* quando apro il toggle */
+  #menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  #menu-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  /* rendo visibile overlay e slido in nav */
+  #menu-toggle:checked ~ .nav-actions {
+    opacity: 1;
+    visibility: visible;
+  }
+  #menu-toggle:checked ~ .nav-actions .main-nav {
+    transform: translateX(0);
+    animation: menuIn 0.4s ease-out;
+  }
+}
+
+/* keyframe slide-in */
+@keyframes menuIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
