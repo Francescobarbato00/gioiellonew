@@ -1356,3 +1356,37 @@ body {
     transform: translateX(0);
   }
 }
+/* ———————————————— */
+/* FIX ROTTAZIONE / SCROLL ORIZZONTALE IN ABOUT */
+/* ———————————————— */
+.about-container {
+  /* evita qualsiasi overflow orizzontale generato dalle animazioni */
+  overflow-x: hidden;
+}
+
+/* Mobile: ridimensiona basi e padding in modo che non superino la viewport */
+@media (max-width: 768px) {
+  .about-container {
+    /* meno gap su mobile, per non sommare troppi padding */
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+
+  .about-image,
+  .about-text {
+    flex: 1 1 auto;      /* non forzare 100% + padding fuori box */
+    width: 100%;         /* piena larghezza del container interno */
+    max-width: 100%;     /* mai oltre */
+    box-sizing: border-box; /* padding incluso nella width */
+  }
+
+  /* immagine più compatta su schermi piccoli */
+  .about-image {
+    min-height: 250px;
+  }
+
+  /* padding laterale contenuto testo ridotto */
+  .about-text {
+    padding: 1.5rem 1rem;
+  }
+}
